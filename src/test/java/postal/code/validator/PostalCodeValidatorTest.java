@@ -1,6 +1,9 @@
 package postal.code.validator;
 
+import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,4 +30,14 @@ class PostalCodeValidatorTest {
         assertFalse(postalCodeValidator.isCorrect("#+7*9"));
         //assertFalse(postalCodeValidator.isCorrect(null));
     }
+
+
+    // zwijamy powyzsze wstawki "na sztywno" za pomoca anotacji parametryzowanej w jedna:
+
+   @ParameterizedTest
+    @ValueSource(strings = {"00-000", "99-999","35-021","25-202"})
+    public void valid(String postalCode){
+       PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
+       assertTrue(postalCodeValidator.isCorrect(postalCode));
+   }
 }
