@@ -3,6 +3,8 @@ package postal.code.validator;
 import com.sun.org.glassfish.gmbal.ParameterNames;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,10 +36,31 @@ class PostalCodeValidatorTest {
 
     // zwijamy powyzsze wstawki "na sztywno" za pomoca anotacji parametryzowanej w jedna:
 
-   @ParameterizedTest
+    @ParameterizedTest
     @ValueSource(strings = {"00-000", "99-999","35-021","25-202"})
     public void valid(String postalCode){
-       PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
-       assertTrue(postalCodeValidator.isCorrect(postalCode));
-   }
+        PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
+        assertTrue(postalCodeValidator.isCorrect(postalCode));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"00-0a1", "9b-999","&*=*-/","null",""})
+    public void inValid(String postalCode){
+        PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
+        assertFalse(postalCodeValidator.isCorrect(postalCode));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource             // przekaze nulla i wartosci puste
+    public void inValidNullAndEmpty(String postalCode){
+        PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
+        assertFalse(postalCodeValidator.isCorrect(postalCode));
+    }
+
+    @ParameterizedTest
+    @NullSource                     // przekaze tylko nulla
+    public void inValidNull(String postalCode){
+        PostalCodeValidator postalCodeValidator = new PostalCodeValidator();
+        assertFalse(postalCodeValidator.isCorrect(postalCode));
+    }
 }
