@@ -1,6 +1,6 @@
 package postal.code.validator;
 
-import com.sun.org.glassfish.gmbal.ParameterNames;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
