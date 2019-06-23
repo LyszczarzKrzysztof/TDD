@@ -15,6 +15,6 @@ class PrimeFinderTest {
     @ParameterizedTest
     @ValueSource(ints = {-1,0})
     public void nieMaLiczb(int liczba){
-        assertNotEquals(liczba,PrimeFinder.finder(liczba));
+        assertNull(PrimeFinder.finder(liczba));
     }
 }
