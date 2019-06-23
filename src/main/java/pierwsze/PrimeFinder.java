@@ -1,6 +1,5 @@
 package pierwsze;
 
-
 import java.util.TreeSet;
 
 public class PrimeFinder {
@@ -8,13 +7,15 @@ public class PrimeFinder {
 
     public static TreeSet setNumbers = new TreeSet();
 
-    public static TreeSet finder(int liczba){
-
-        if(liczba>0) {
+    public static TreeSet finder(int liczba) {
+        if (liczba <= 0) {
+            throw new IllegalArgumentException();
+        }
+        if (liczba > 0) {
             int i = 1;
             do {
 
-                if(PrimeTester.isPrime(i)){
+                if (PrimeTester.isPrime(i)) {
                     setNumbers.add(i);
                 }
 
@@ -24,7 +25,7 @@ public class PrimeFinder {
 
             return setNumbers;
 
-        }else{
+        } else {
             return null;
         }
 
